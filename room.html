@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Enter Video Link</h1>
+    <input type="text" id="videoLink" placeholder="Paste your video link here">
+    <button id="addVideoBtn">Add Video</button>
+    <button id="generateLinkBtn">Generate Room Link</button>
+
+    <div id="videoContainer" style="display:none; margin-top: 20px;">
+        <h2>Now Watching:</h2>
+        <iframe id="videoPlayer" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div id="roomLink" style="display:none;">
+        <p>Share this link with others:</p>
+        <input type="text" id="sharedLink" readonly>
+    </div>
+
+    <script>
+        document.getElementById('addVideoBtn').addEventListener('click', function() {
+            const videoLink = document.getElementById('videoLink').value;
+            const videoId = extractVideoID(videoLink);
+            if (videoId) {
+                const iframeSrc = `https://www.youtube.com/embed/${videoId}`;
+                document.getElementById('videoPlayer').src = iframeSrc;
+                document.getElementById('videoContainer').style.display = 'block';
+            } else {
+                alert('Please enter a valid YouTube link.');
+            }
+        });
+
+        document.getElementById('generateLinkBtn').addEventListener('click', function() {
+            const roomId = Math.random().toString(36).substring(2, 10);
+            const roomUrl = `${window.location.origin}/room.html?id=${roomId}`;
+            document.getElementById('sharedLink').value = roomUrl;
+            document.getElementById('roomLink').style.display = 'block';
+        });
+
+        function extractVideoID(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
+            const matches = url.match(regex);
+            return matches ? matches[1] : null;
+        }
+    </script>
+</body>
+</html>
