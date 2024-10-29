@@ -26,3 +26,16 @@ button {
 #videoContainer {
     margin-top: 20px;
 }
+
+#chatContainer {
+    margin-top: 20px;
+    width: 300px;
+}
+
+#chatMessages {
+    height: 100px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}

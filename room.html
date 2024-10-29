@@ -14,10 +14,12 @@
         </div>
         <input type="text" id="videoLink" placeholder="Paste YouTube video link here">
         <button id="addVideoBtn">Add Video</button>
-    </div>
-    <div id="roomLink" style="display: none;">
-        <p>Your room link:</p>
-        <input type="text" id="roomId" readonly>
+        <div id="chatContainer">
+            <h2>Chat</h2>
+            <div id="chatMessages"></div>
+            <input type="text" id="chatInput" placeholder="Type a message">
+            <button id="sendChatBtn">Send</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

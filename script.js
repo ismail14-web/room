@@ -1,23 +1,23 @@
-document.getElementById('generateLinkBtn').addEventListener('click', function() {
+// Room creation logic
+document.getElementById('createRoomBtn').addEventListener('click', function() {
     const roomId = Math.random().toString(36).substring(2, 10);
-    const roomUrl = `${window.location.href}room.html?id=${roomId}`;
+    const roomUrl = `${window.location.origin}/room.html?id=${roomId}`;
     document.getElementById('roomId').value = roomUrl;
 
     // Show the room link input
     document.getElementById('roomLink').style.display = 'block';
-    document.getElementById('mainContainer').style.display = 'none';
-
-    // Save room ID to localStorage (you can use this to retrieve the video later)
-    localStorage.setItem(roomId, '');
 });
 
-// Check if room ID exists in the URL and load the video
+// Load video and chat when entering a room
 const urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get('id');
+
 if (roomId) {
     document.getElementById('mainContainer').style.display = 'block';
-
-    // Retrieve video link associated with the room ID
+    
+    const chatMessages = document.getElementById('chatMessages');
+    
+    // Check if a video link is already saved for this room (mock implementation)
     const savedVideoLink = localStorage.getItem(roomId);
     if (savedVideoLink) {
         const videoId = extractVideoID(savedVideoLink);
@@ -29,10 +29,29 @@ if (roomId) {
             alert('No valid video found for this room.');
         }
     } else {
-        alert('No video found for this room.');
+        alert('No video found for this room. Please add a video link.');
     }
+
+    // Chat functionality
+    document.getElementById('sendChatBtn').addEventListener('click', function() {
+        const message = document.getElementById('chatInput').value;
+        if (message) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            document.getElementById('chatInput').value = ''; // Clear input field
+        }
+    });
 }
 
+// Function to extract video ID from YouTube URL
+function extractVideoID(url) {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
+    const matches = url.match(regex);
+    return matches ? matches[1] : null;
+}
+
+// Handle adding video link
 document.getElementById('addVideoBtn').addEventListener('click', function() {
     const videoLink = document.getElementById('videoLink').value;
     const videoId = extractVideoID(videoLink);
@@ -41,18 +60,9 @@ document.getElementById('addVideoBtn').addEventListener('click', function() {
         document.getElementById('videoPlayer').src = iframeSrc;
         document.getElementById('videoContainer').style.display = 'block';
 
-        // Save the video link with the generated room ID
-        if (roomId) {
-            localStorage.setItem(roomId, videoLink); // Save video link with room ID as key
-        }
+        // Save the video link with the room ID as key
+        localStorage.setItem(roomId, videoLink);
     } else {
         alert('Please enter a valid YouTube link.');
     }
 });
-
-// Function to extract video ID from YouTube URL
-function extractVideoID(url) {
-    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
-    const matches = url.match(regex);
-    return matches ? matches[1] : null;
-}
