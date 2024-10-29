@@ -28,6 +28,19 @@ function extractVideoID(url) {
 const urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get('id');
 if (roomId) {
-    alert(`Welcome to the room with ID: ${roomId}`);
-    // You can add additional logic here to load specific content based on roomId
+    // Hide input fields and buttons
+    document.getElementById('mainContainer').style.display = 'none';
+
+    // Optional: Here you could use localStorage or some other method to retrieve the video link associated with the room ID
+    const savedVideoLink = localStorage.getItem(roomId); // Assuming you save the video link with the room ID as the key
+    if (savedVideoLink) {
+        const videoId = extractVideoID(savedVideoLink);
+        if (videoId) {
+            const iframeSrc = `https://www.youtube.com/embed/${videoId}`;
+            document.getElementById('videoPlayer').src = iframeSrc;
+            document.getElementById('videoContainer').style.display = 'block';
+        }
+    } else {
+        alert('No video found for this room.');
+    }
 }

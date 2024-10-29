@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Enter Video Link</h1>
-    <input type="text" id="videoLink" placeholder="Paste your video link here">
-    <button id="addVideoBtn">Add Video</button>
-    <button id="generateLinkBtn">Generate Room Link</button>
+    <div id="mainContainer">
+        <h1>Enter Video Link</h1>
+        <input type="text" id="videoLink" placeholder="Paste your video link here">
+        <button id="addVideoBtn">Add Video</button>
+        <button id="generateLinkBtn">Generate Room Link</button>
 
-    <div id="videoContainer" style="display:none; margin-top: 20px;">
-        <h2>Now Watching:</h2>
-        <iframe id="videoPlayer" width="560" height="315" frameborder="0" allowfullscreen></iframe>
-    </div>
+        <div id="videoContainer" style="display:none; margin-top: 20px;">
+            <h2>Now Watching:</h2>
+            <iframe id="videoPlayer" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
 
-    <div id="roomLink" style="display:none;">
-        <p>Share this link with others:</p>
-        <input type="text" id="sharedLink" readonly>
+        <div id="roomLink" style="display:none;">
+            <p>Share this link with others:</p>
+            <input type="text" id="sharedLink" readonly>
+        </div>
     </div>
 
     <script src="script.js"></script>
