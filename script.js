@@ -19,7 +19,7 @@ document.getElementById('addVideoBtn').addEventListener('click', function() {
 
 document.getElementById('generateLinkBtn').addEventListener('click', function() {
     const roomId = Math.random().toString(36).substring(2, 10);
-    const repositoryName = 'your-repo-name'; // Replace with your actual repository name
+    const repositoryName = 'room'; // Replace with your actual repository name
     const roomUrl = `${window.location.origin}/${repositoryName}/room.html?id=${roomId}`;
     document.getElementById('sharedLink').value = roomUrl;
     document.getElementById('roomLink').style.display = 'block';
