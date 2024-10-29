@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room</title>
+    <title>Video Room</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="mainContainer">
-        <h1>Enter Video Link</h1>
-        <input type="text" id="videoLink" placeholder="Paste your video link here">
-        <button id="addVideoBtn">Add Video</button>
-        <button id="generateLinkBtn">Generate Room Link</button>
-
-        <div id="videoContainer" style="display:none; margin-top: 20px;">
-            <h2>Now Watching:</h2>
+        <h1>Video Room</h1>
+        <div id="videoContainer" style="display: none;">
             <iframe id="videoPlayer" width="560" height="315" frameborder="0" allowfullscreen></iframe>
         </div>
-
-        <div id="roomLink" style="display:none;">
-            <p>Share this link with others:</p>
-            <input type="text" id="sharedLink" readonly>
-        </div>
+        <input type="text" id="videoLink" placeholder="Paste YouTube video link here">
+        <button id="addVideoBtn">Add Video</button>
     </div>
-
+    <div id="roomLink" style="display: none;">
+        <p>Your room link:</p>
+        <input type="text" id="roomId" readonly>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
